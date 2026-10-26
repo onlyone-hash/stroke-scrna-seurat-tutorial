@@ -13,3 +13,7 @@ renv/cache/
 scripts/_initial_download.R
 scripts/_inspect_annotation.R
 stroke-scrna-seurat-tutorial/
+tmp/
+results/practice/
+Rplots.pdf
+__pycache__/
