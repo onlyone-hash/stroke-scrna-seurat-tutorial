@@ -1,0 +1,47 @@
+# Run from the project root after run.R. Checks real outputs, not mock data.
+if (.Platform$OS.type == "windows" && !l10n_info()[["UTF-8"]]) Sys.setlocale("LC_ALL", "English_United States.utf8")
+source("config/analysis_config.R", encoding = "UTF-8")
+read_table <- function(name) data.table::fread(file.path("results/tables", paste0(name, ".csv")), data.table = FALSE)
+qc <- read_table("qc_all_cells"); stats <- read_table("qc_summary")
+meta <- read_table("analyzed_cell_metadata"); ann <- read_table("cluster_annotation")
+comp <- read_table("celltype_composition"); de <- read_table("microglia_pseudobulk_DE_all")
+pb_n <- read_table("microglia_pseudobulk_cell_counts")
+manifest <- read_table("input_manifest")
+summary <- jsonlite::read_json("results/run_summary.json", simplifyVector = TRUE)
+stopifnot(nrow(stats) == 6, nrow(manifest) == 18, !anyDuplicated(qc$cell), !anyDuplicated(meta$cell))
+stopifnot(nrow(qc) == sum(stats$input_cells), sum(qc$pass_qc) == sum(stats$qc_pass_cells))
+stopifnot(all(!qc$selected | qc$pass_qc), setequal(qc$cell[qc$selected], meta$cell))
+stopifnot(nrow(meta) == sum(stats$analyzed_cells), nrow(meta) == summary$analyzed_cells)
+stopifnot(all(is.finite(meta$UMAP_1)), all(is.finite(meta$UMAP_2)), sum(ann$n_cells) == nrow(meta))
+stopifnot(setequal(as.character(ann$cluster), as.character(unique(meta$seurat_clusters))))
+stopifnot(all(abs(tapply(comp$proportion, comp$sample_id, sum) - 1) < 1e-10), sum(comp$n_cells) == nrow(meta))
+stopifnot(all(is.finite(de$FDR)), all(de$FDR >= 0 & de$FDR <= 1), !anyDuplicated(de$gene))
+expected_direction <- ifelse(de$FDR < cfg$fdr & de$logFC >= cfg$log2fc, "Higher_in_MCAO", ifelse(de$FDR < cfg$fdr & de$logFC <= -cfg$log2fc, "Lower_in_MCAO", "Below_threshold"))
+stopifnot(identical(de$direction, expected_direction))
+stopifnot(sum(de$direction == "Higher_in_MCAO") == summary$microglia_higher_MCAO,
+          sum(de$direction == "Lower_in_MCAO") == summary$microglia_lower_MCAO,
+          nrow(de) == summary$tested_genes, all(pb_n$n_cells >= cfg$min_cells_pseudobulk))
+stopifnot(all(as.integer(table(factor(meta$sample_id[meta$cell_type == "Microglia"], levels = pb_n$sample_id))) == pb_n$n_cells))
+# Sample-level pseudobulk columns must exactly sum original integer counts.
+suppressPackageStartupMessages(library(Seurat))
+o <- readRDS("results/objects/02_annotated.rds")
+pb <- readRDS("results/objects/03_pseudobulk.rds")
+cnt <- LayerData(o, layer = "counts", assay = "RNA")
+stopifnot(all(pb$counts >= 0), all(pb$counts == round(pb$counts)), ncol(pb$counts) == 6,
+          identical(colnames(pb$counts), pb_n$sample_id), qr(pb$design)$rank == 2)
+for (s in colnames(pb$counts)) {
+  ix <- which(o$cell_type == "Microglia" & o$sample_id == s)
+  expected <- Matrix::rowSums(cnt[, ix, drop = FALSE])
+  stopifnot(identical(as.numeric(expected), as.numeric(pb$counts[, s])))
+}
+raw_files <- file.path("data/raw", manifest$file)
+stopifnot(all(file.exists(raw_files)))
+sha <- vapply(raw_files, digest::digest, character(1), algo = "sha256", file = TRUE)
+stopifnot(all(sha == manifest$sha256))
+pngs <- list.files("results/figures", pattern = "[.]png$", full.names = TRUE)
+pdfs <- list.files("results/figures", pattern = "[.]pdf$", full.names = TRUE)
+stopifnot(length(pngs) == 15, length(pdfs) == 15,
+          all(file.info(c(pngs, pdfs))$size > 1000), file.exists("results/分析报告.md"))
+message_text <- sprintf("PASS: %d cells; %d clusters; 6 samples; %d tested genes; 15 PNG + 15 PDF; exact pseudobulk sums; input SHA256 verified.", nrow(meta), nrow(ann), nrow(de))
+writeLines(message_text, "results/logs/verification.txt")
+cat(message_text, "\n")

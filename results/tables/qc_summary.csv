@@ -1,0 +1,7 @@
+﻿sample_id,group,input_cells,qc_pass_cells,analyzed_cells,retained_percent
+Sham1,Sham,8771,8753,1000,99.79
+Sham2,Sham,8540,8510,1000,99.65
+Sham3,Sham,9980,9950,1000,99.7
+MCAO1,MCAO,11772,11717,1000,99.53
+MCAO2,MCAO,11361,11318,1000,99.62
+MCAO3,MCAO,8104,8078,1000,99.68

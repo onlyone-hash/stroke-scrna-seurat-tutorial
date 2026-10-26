@@ -1,0 +1,9 @@
+Package: StrokeSingleCellTutorial
+Type: Project
+Title: Reproducible Mouse Ischemic Stroke Single Cell Tutorial
+Version: 1.0.0
+Authors@R: person("Tutorial", "Contributors", role = c("aut", "cre"), email = "noreply@example.org")
+Description: An educational reanalysis of GSE174574 using Seurat and sample-level edgeR pseudobulk analysis.
+License: MIT
+Encoding: UTF-8
+Imports: Seurat, SeuratObject, Matrix, ggplot2, patchwork, data.table, digest, jsonlite, ragg, ggrepel, renv, statmod, edgeR, limma, future, scales

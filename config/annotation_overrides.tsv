@@ -1,0 +1,3 @@
+cluster	cell_type	reason
+4	Mural_cells	Rgs5/Pdgfrb and Acta2/Tagln/Myh11 are jointly enriched; retain broad vascular mural identity rather than assigning a pure pericyte or smooth-muscle population.
+13	Uncertain	P2ry12/Tmem119/Cx3cr1 are detected in 98-100% while Cldn5 is detected in 100% and Pecam1 in 72.5%; mixed microglial/endothelial signature, possible doublets or contamination; exclude from microglia pseudobulk.

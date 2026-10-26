@@ -1,0 +1,15 @@
+# 原始公开数据由下载脚本获取，不重新分发大型数据文件。
+data/raw/*
+data/metadata/*.gz
+results/objects/*
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+renv/library/
+renv/staging/
+renv/cache/
+*.part
+scripts/_initial_download.R
+scripts/_inspect_annotation.R
+stroke-scrna-seurat-tutorial/

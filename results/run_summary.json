@@ -1,0 +1,13 @@
+{
+  "accession": "GSE174574",
+  "seed": 20261026,
+  "max_cells_per_sample": 1000,
+  "input_cells": 58528,
+  "qc_pass": 58326,
+  "analyzed_cells": 6000,
+  "clusters": 17,
+  "tentative_cell_types": ["Astrocytes", "Choroid_plexus", "Endothelial", "Ependymal", "Fibroblasts", "Macrophages", "Microglia", "Monocytes", "Mural_cells", "Neutrophils", "Oligodendrocytes", "Uncertain"],
+  "tested_genes": 6836,
+  "microglia_higher_MCAO": 548,
+  "microglia_lower_MCAO": 668
+}

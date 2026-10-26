@@ -1,0 +1,7 @@
+sample_id	gsm	group	file_label	timepoint
+Sham1	GSM5319987	Sham	sham1	sham
+Sham2	GSM5319988	Sham	sham2	sham
+Sham3	GSM5319989	Sham	sham3	sham
+MCAO1	GSM5319990	MCAO	MCAO1	24h_after_MCAO
+MCAO2	GSM5319991	MCAO	MCAO2	24h_after_MCAO
+MCAO3	GSM5319992	MCAO	MCAO3	24h_after_MCAO

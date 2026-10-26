@@ -1,0 +1,100 @@
+Started: 2026-10-26 13:17:01 
+
+===== 00_setup.R =====
+
+===== 01_download.R =====
+Data: GSM5319987_sham1_barcodes.tsv.gz 
+Data: GSM5319987_sham1_genes.tsv.gz 
+Data: GSM5319987_sham1_matrix.mtx.gz 
+Data: GSM5319988_sham2_barcodes.tsv.gz 
+Data: GSM5319988_sham2_genes.tsv.gz 
+Data: GSM5319988_sham2_matrix.mtx.gz 
+Data: GSM5319989_sham3_barcodes.tsv.gz 
+Data: GSM5319989_sham3_genes.tsv.gz 
+Data: GSM5319989_sham3_matrix.mtx.gz 
+Data: GSM5319990_MCAO1_barcodes.tsv.gz 
+Data: GSM5319990_MCAO1_genes.tsv.gz 
+Data: GSM5319990_MCAO1_matrix.mtx.gz 
+Data: GSM5319991_MCAO2_barcodes.tsv.gz 
+Data: GSM5319991_MCAO2_genes.tsv.gz 
+Data: GSM5319991_MCAO2_matrix.mtx.gz 
+Data: GSM5319992_MCAO3_barcodes.tsv.gz 
+Data: GSM5319992_MCAO3_genes.tsv.gz 
+Data: GSM5319992_MCAO3_matrix.mtx.gz 
+
+===== 02_preprocess.R =====
+Reading Sham1 
+Reading Sham2 
+Reading Sham3 
+Reading MCAO1 
+Reading MCAO2 
+Reading MCAO3 
+  sample_id group input_cells qc_pass_cells analyzed_cells retained_percent
+1     Sham1  Sham        8771          8753           1000            99.79
+2     Sham2  Sham        8540          8510           1000            99.65
+3     Sham3  Sham        9980          9950           1000            99.70
+4     MCAO1  MCAO       11772         11717           1000            99.53
+5     MCAO2  MCAO       11361         11318           1000            99.62
+6     MCAO3  MCAO        8104          8078           1000            99.68
+
+===== 03_annotation.R =====
+   cluster n_cells        candidate second_candidate top_score score_gap
+1        0    1316      Endothelial          Neurons 0.7597961 0.7689591
+2        1     825      Endothelial        Erythroid 0.7069078 0.4397437
+3        2     646        Microglia          B_cells 0.9803399 0.7314675
+4        3     622        Microglia          B_cells 1.9343751 1.5689458
+5        4     382    Smooth_muscle        Pericytes 2.1476126 0.3094892
+6        5     380       Astrocytes          Neurons 2.5467196 2.3298442
+7        6     344   Choroid_plexus        Ependymal 2.6004233 1.7833773
+8        7     320      Endothelial        Erythroid 0.7002936 0.6605497
+9        8     307      Macrophages        Monocytes 2.4032746 1.1711239
+10       9     292      Endothelial          Neurons 0.6287329 0.6614374
+11      10     174 Oligodendrocytes              OPC 4.3061682 2.9877484
+12      11     156        Monocytes              OPC 2.6605511 2.2822693
+13      12      79      Neutrophils        Monocytes 4.7872047 4.2337998
+14      13      51        Microglia      Endothelial 1.4179100 0.9470237
+15      14      44      Fibroblasts              OPC 7.2215582 6.1013840
+16      15      34      Endothelial        Pericytes 1.0003682 0.9218163
+17      16      28        Ependymal       Astrocytes 9.0430988 7.5845961
+          cell_type
+1       Endothelial
+2       Endothelial
+3         Microglia
+4         Microglia
+5       Mural_cells
+6        Astrocytes
+7    Choroid_plexus
+8       Endothelial
+9       Macrophages
+10      Endothelial
+11 Oligodendrocytes
+12        Monocytes
+13      Neutrophils
+14        Uncertain
+15      Fibroblasts
+16      Endothelial
+17        Ependymal
+                                                                                                                                                                                                                   annotation_basis
+1                                                                                                                                                                                   canonical multi-gene cluster score; provisional
+2                                                                                                                                                                                   canonical multi-gene cluster score; provisional
+3                                                                                                                                                                                   canonical multi-gene cluster score; provisional
+4                                                                                                                                                                                   canonical multi-gene cluster score; provisional
+5                                                    manual review: Rgs5/Pdgfrb and Acta2/Tagln/Myh11 are jointly enriched; retain broad vascular mural identity rather than assigning a pure pericyte or smooth-muscle population.
+6                                                                                                                                                                                   canonical multi-gene cluster score; provisional
+7                                                                                                                                                                                   canonical multi-gene cluster score; provisional
+8                                                                                                                                                                                   canonical multi-gene cluster score; provisional
+9                                                                                                                                                                                   canonical multi-gene cluster score; provisional
+10                                                                                                                                                                                  canonical multi-gene cluster score; provisional
+11                                                                                                                                                                                  canonical multi-gene cluster score; provisional
+12                                                                                                                                                                                  canonical multi-gene cluster score; provisional
+13                                                                                                                                                                                  canonical multi-gene cluster score; provisional
+14 manual review: P2ry12/Tmem119/Cx3cr1 are detected in 98-100% while Cldn5 is detected in 100% and Pecam1 in 72.5%; mixed microglial/endothelial signature, possible doublets or contamination; exclude from microglia pseudobulk.
+15                                                                                                                                                                                  canonical multi-gene cluster score; provisional
+16                                                                                                                                                                                  canonical multi-gene cluster score; provisional
+17                                                                                                                                                                                  canonical multi-gene cluster score; provisional
+
+===== 04_pseudobulk.R =====
+
+===== 05_report.R =====
+- The lockfile is already up to date.
+Completed: 2026-10-26 13:18:54 

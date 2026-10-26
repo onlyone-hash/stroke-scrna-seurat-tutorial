@@ -1,0 +1,18 @@
+﻿cluster,n_cells,candidate,second_candidate,top_score,score_gap,cell_type,annotation_basis
+0,1316,Endothelial,Neurons,0.759796052868757,0.768959125221642,Endothelial,canonical multi-gene cluster score; provisional
+1,825,Endothelial,Erythroid,0.706907787420325,0.439743720199638,Endothelial,canonical multi-gene cluster score; provisional
+2,646,Microglia,B_cells,0.980339850455309,0.731467524827429,Microglia,canonical multi-gene cluster score; provisional
+3,622,Microglia,B_cells,1.93437511913695,1.56894582536426,Microglia,canonical multi-gene cluster score; provisional
+4,382,Smooth_muscle,Pericytes,2.14761264684529,0.309489180481393,Mural_cells,manual review: Rgs5/Pdgfrb and Acta2/Tagln/Myh11 are jointly enriched; retain broad vascular mural identity rather than assigning a pure pericyte or smooth-muscle population.
+5,380,Astrocytes,Neurons,2.54671963119356,2.32984424792643,Astrocytes,canonical multi-gene cluster score; provisional
+6,344,Choroid_plexus,Ependymal,2.60042332911944,1.78337731239444,Choroid_plexus,canonical multi-gene cluster score; provisional
+7,320,Endothelial,Erythroid,0.70029362228965,0.660549676402036,Endothelial,canonical multi-gene cluster score; provisional
+8,307,Macrophages,Monocytes,2.40327463339667,1.17112392787659,Macrophages,canonical multi-gene cluster score; provisional
+9,292,Endothelial,Neurons,0.628732939697147,0.661437391373159,Endothelial,canonical multi-gene cluster score; provisional
+10,174,Oligodendrocytes,OPC,4.30616821061482,2.98774837146026,Oligodendrocytes,canonical multi-gene cluster score; provisional
+11,156,Monocytes,OPC,2.66055107988087,2.28226929888931,Monocytes,canonical multi-gene cluster score; provisional
+12,79,Neutrophils,Monocytes,4.78720472973731,4.23379983648534,Neutrophils,canonical multi-gene cluster score; provisional
+13,51,Microglia,Endothelial,1.41790998530555,0.947023711553523,Uncertain,"manual review: P2ry12/Tmem119/Cx3cr1 are detected in 98-100% while Cldn5 is detected in 100% and Pecam1 in 72.5%; mixed microglial/endothelial signature, possible doublets or contamination; exclude from microglia pseudobulk."
+14,44,Fibroblasts,OPC,7.22155819111565,6.10138395326274,Fibroblasts,canonical multi-gene cluster score; provisional
+15,34,Endothelial,Pericytes,1.00036822678472,0.921816288049415,Endothelial,canonical multi-gene cluster score; provisional
+16,28,Ependymal,Astrocytes,9.0430988241763,7.58459611725227,Ependymal,canonical multi-gene cluster score; provisional
